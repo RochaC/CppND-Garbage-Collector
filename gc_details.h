@@ -1,10 +1,9 @@
 // This class defines an element that is stored
 // in the garbage collection information list.
 //
-template <class T>
-class PtrDetails
-{
-  public:
+template<class T>
+class PtrDetails {
+public:
     unsigned refcount; // current reference count
     T *memPtr;         // pointer to allocated memory
     /* isArray is true if memPtr points
@@ -18,16 +17,20 @@ array, then arraySize contains its size */
     // If this is an array, then size specifies
     // the size of the array.
 
-    PtrDetails(void)
-    {
-        // TODO: Implement PtrDetails
+    PtrDetails(T *ptr, unsigned size = 0) {
+        isArray = (size > 0);
+        arraySize = size;
+        refcount = 1;
+
+        memPtr = ptr;
     }
 };
+
 // Overloading operator== allows two class objects to be compared.
 // This is needed by the STL list class.
-template <class T>
+template<class T>
 bool operator==(const PtrDetails<T> &ob1,
-                const PtrDetails<T> &ob2)
-{
-    // TODO: Implement operator==
+                const PtrDetails<T> &ob2) {
+    return (ob1.memPtr == ob2.memPtr);
+
 }
